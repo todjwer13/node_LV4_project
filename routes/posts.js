@@ -71,20 +71,21 @@ router.put("/posts/:postId", authMiddleware, async (req, res) => {
   const { postId } = req.params;
   const { title, content } = req.body;
   const { userId } = res.locals.user;
-  console.log(userId)
   const post = await Posts.findOne({ where: { postId } });
-  console.log(post.UserId)
+
   if (!post) {return res.status(404).json({ errorMessage: "게시글이 존재하지 않습니다." });
   } else if (!title) {return res.status(412).json({ errorMessage: "게시글 제목을 입력해 주세요" });
   } else if (!content) {return res.status(412).json({ errorMessage: "게시글 내용을 입력해 주세요" });
+  } else if (typeof title !== "string") {return res.status(412) .json({ errorMessage: "게시글 제목의 형식이 일치하지 않습니다." });
+  } else if (typeof content !== "string") {return res.status(412).json({ errorMessage: "게시글 내용의 형식이 일치하지 않습니다." });
   } else if (userId !== post.UserId) {return res.status(412).json({ errorMessage: "게시글 수정권한이 없습니다." });
   }
   try {
-    await Posts.update(
+    await Posts.updateOne(
       { title, content },
       { where: { [Op.and]: [{ postId }, {UserId: userId}]}, },
     );
-    res.status(200).json({ message: "게시글을 수정하였습니다." });
+    res.json({ message: "게시글을 수정하였습니다." });
   } catch (error) {
     return res.status(400).json({ errorMessage: "게시글 수정에 실패하였습니다." });
   }
@@ -98,7 +99,7 @@ router.delete("/posts/:postId", authMiddleware, async (req, res) => {
   if (post) {
     if (userId === post.UserId) {
       await post.destroy({ where: {postId: postId} });
-      res.status(200).json({ success: true, message: "게시글을 삭제하였습니다." });
+      res.status(200).json({ success: true, message: "게시글을 삭제하였습니" });
     } else {
       res.status(400).json({ Message: "게시글 삭제 권한이 없습니다." });
     }

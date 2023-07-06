@@ -9,4 +9,5 @@ const development = {
   dialect: "mysql",
 };
 
+
 module.exports = { development };
