@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Op } = require("sequelize");
-const { Posts, Users } = require("../models");
+const { Posts, Users, Likes } = require("../models");
 const authMiddleware = require("../middleware/auth-middleware");
 
 // 게시글 작성

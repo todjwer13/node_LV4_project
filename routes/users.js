@@ -33,7 +33,7 @@ router.post("/login", async (req,res) => {
 
   if (!user || user.password !== password) return res.status(412).json({errorMessage: "닉네임 또는 패스워드가 틀렸습니다."});
 
-  const token = jwt.sign({ userId: user.userId },"nodejs-LV3-key");
+  const token = jwt.sign({ userId: user.userId },"nodejs-LV4-key");
 
 	res.cookie("authorization", `Bearer ${token}`); 
   res.status(200).json({ token: token }); 

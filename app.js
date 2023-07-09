@@ -6,10 +6,11 @@ const port = 3000;
 const userRouter = require("./routes/users");
 const postRouter = require("./routes/posts");
 const commentRouter = require("./routes/comments");
+const likeRouter = require("./routes/like");
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/", [userRouter, postRouter, commentRouter]);
+app.use("/", [userRouter, postRouter, commentRouter, likeRouter]);
 
 app.listen(port, () => {
   console.log(port, "포트로 서버가 열렸습니다.");
