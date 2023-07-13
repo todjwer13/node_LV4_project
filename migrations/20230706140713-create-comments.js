@@ -9,39 +9,39 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'userId',
-        }
+        },
       },
-      PostId: {
+      postId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Posts',
-          key: 'postId'
-        }
+          key: 'postId',
+        },
       },
       nickname: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       comment: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now")
+        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now")
-      }
+        defaultValue: Sequelize.fn('now'),
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Comments');
-  }
+  },
 };

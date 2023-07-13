@@ -1,5 +1,5 @@
 'use strict';
-const {Model} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Likes extends Model {
     /**
@@ -11,42 +11,44 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Users, {
         sourceKey: 'userId',
-        foreignKey: 'UserId',
+        foreignKey: 'userId',
       });
 
       this.belongsTo(models.Posts, {
         sourceKey: 'postId',
-        foreignKey: 'PostId',
+        foreignKey: 'postId',
       });
     }
   }
-  Likes.init({
-    likeId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
+  Likes.init(
+    {
+      likeId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        type: DataTypes.STRING,
+      },
+      postId: {
+        type: DataTypes.STRING,
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
     },
-    UserId: {
-      type: DataTypes.STRING
-    },
-    PostId: {
-      type: DataTypes.STRING
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-  },
-     {
-    sequelize,
-    modelName: 'Likes',
-  });
+    {
+      sequelize,
+      modelName: 'Likes',
+    }
+  );
   return Likes;
 };

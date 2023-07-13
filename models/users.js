@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.Posts, {
         //Posts 모델에게 1:N 관계설정
-        sourceKey: "userId",
-        foreignKey: "UserId",
+        sourceKey: 'userId',
+        foreignKey: 'userId',
       });
     }
   }
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Users",
+      modelName: 'Users',
     }
   );
   return Users;
